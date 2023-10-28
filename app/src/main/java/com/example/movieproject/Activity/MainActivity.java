@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mRequestQueue.add(mStringRequest);
     }
     private void sendRequest2() {
-        mRequestQueue = Volley.newRequestQueue(this);
+        mRequestQueue = Volley.newRequestQueue(this);  // instead of retrofit
         loadingProgress2.setVisibility(View.VISIBLE);
         mStringRequest2 = new StringRequest(Request.Method.GET, "https://moviesapi.ir/api/v1/movies?page=5", response -> {
             Gson gson = new Gson();

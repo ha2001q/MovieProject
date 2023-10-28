@@ -17,7 +17,8 @@ public class SignupActivity extends AppCompatActivity {
     private EditText txtUserName,txtPassword,txtpassword2,txtFullName;
     private Button btnSignup;
     private TextView txtLogin;
-    private SharedPreferencesHelper sharedPreferences;
+//    private SharedPreferencesHelper sharedPreferences;
+    private DB db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +34,15 @@ public class SignupActivity extends AppCompatActivity {
         txtUserName = (EditText) findViewById(R.id.editTextUserName);
         btnSignup = (Button) findViewById(R.id.btnSignup);
         txtLogin = (TextView) findViewById(R.id.textLogin);
-        sharedPreferences = new SharedPreferencesHelper(getApplicationContext());
+//        sharedPreferences = new SharedPreferencesHelper(getApplicationContext());
         btnSignup.setOnClickListener(view -> {
             if (txtUserName.getText().toString().isEmpty() || txtFullName.getText().toString().isEmpty() || txtPassword.getText().toString().isEmpty() || txtpassword2.getText().toString().isEmpty()){
                 Toast.makeText(getApplicationContext(),"Please File All Filed",Toast.LENGTH_LONG).show();
                 return;
             } else if (txtPassword.getText().toString().equals(txtpassword2.getText().toString())) {
-                sharedPreferences.saveUserData(txtFullName.getText().toString(),txtUserName.getText().toString(), txtPassword.getText().toString());
+//                //sharedPreferences.saveUserData(txtFullName.getText().toString(),txtUserName.getText().toString(), txtPassword.getText().toString());
+                db=new DB(this);
+                db.insertuser(txtUserName.getText().toString(),txtPassword.getText().toString(),txtFullName.getText().toString());
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
